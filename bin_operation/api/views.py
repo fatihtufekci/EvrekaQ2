@@ -5,5 +5,5 @@ from bin_operation.models import BinOperation
 
 
 class BinOperationViewSet(viewsets.ModelViewSet):
-    queryset = BinOperation.objects.all()
+    queryset = BinOperation.objects.select_related().all()
     serializer_class = BinOperationSerializer

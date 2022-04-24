@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
 
-    'bin_operation.apps.BinOperationConfig'
+    'bin_operation.apps.BinOperationConfig',
+    'alternative_solution.apps.AlternativeSolutionConfig'
 ]
 
 MIDDLEWARE = [

@@ -15,11 +15,7 @@ class OperationSerializer(serializers.ModelSerializer):
 class BinOperationSerializer(serializers.ModelSerializer):
     bin = BinSerializer(read_only=True)
     operation = OperationSerializer(read_only=True)
-    last_collection = serializers.SerializerMethodField()
     
     class Meta:
         model = BinOperation
-        fields = ('bin', 'operation', 'collection_frequency', 'last_collection')
-
-    def get_last_collection(self, obj):
-        return f'{obj.last_collection.strftime("%Y-%m-%d %H:%M:%S")}'
+        fields = ('bin', 'operation', 'collection_frequency')

@@ -12,7 +12,7 @@ class Bin(models.Model):
 class Operation(models.Model):
     collection_frequency = models.IntegerField(default=0)
     last_collection = models.DateTimeField()
-    bin = models.ForeignKey(Bin, on_delete=models.CASCADE)
+    bin = models.ManyToManyField(Bin)
     
     class Meta:
         abstract = True

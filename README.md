@@ -18,12 +18,12 @@ Run the following commands respectively to create your own postgresql database a
 ```sh
 sudo -i -u postgres
 psql
-CREATE DATABASE your_project_name;
+CREATE DATABASE your_database_name;
 CREATE USER your_user_name WITH PASSWORD 'your_password';
 ALTER ROLE your_user_name SET client_encoding TO 'utf8';
 ALTER ROLE your_user_name SET default_transaction_isolation TO 'read committed';
 ALTER ROLE your_user_name SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE your_project_name TO your_user_name;
+GRANT ALL PRIVILEGES ON DATABASE your_database_name TO your_user_name;
 ALTER USER your_user_name CREATEDB;
 ```
 
@@ -95,10 +95,10 @@ You can reach the project from the link below.
 - Our BinOperationSerializer serializer, which provides communication between Python data structure and json format, has been created.
 - A view that allows us to perform Read(List) operations has been created.
 - API Tests written.
-- The project was done in two different ways;
+- The project was done in two different ways as shown below;
 
-## bin_operation app (First Method)
-- In the first method, the Bin class has latitude and longitude fields. BinOperation class has collection_frequency and last_collection fields. Endpoint that returns the collection_frequency list for each BinOperation pair: http://localhost:8000/api/bin-operations/
+## bin_operation app (First Solution)
+- In the first solution, the Bin class has latitude and longitude fields. BinOperation class has collection_frequency and last_collection fields. Endpoint that returns the collection_frequency list for each BinOperation pair: http://localhost:8000/api/bin-operations/
 
 ##### Entity-relationship  diagram
 
@@ -106,8 +106,8 @@ You can reach the project from the link below.
 
 -----------------------------
 
-## alternative_solution app (Second Method)
-- In the alternative method, there are latitude and longitude fields in the Bin class. I tried different method because BinOperation class can inflate the database. Operation class is abstract base class. Here, the common fields collection_frequency, last_collection and bin are kept. Different CollectionOperations can be subclassed to Operation. For example, GarbageCollectionOperation.
+## alternative_solution app (Second Solution)
+- In the alternative solution, there are latitude and longitude fields in the Bin class. Having all Bin-Operation pairs in one table can bloat the BinOperation table. That's why I separated each Operation's relationship with Bin. Then, if the operations need different attributes and methods, a change specific to that operation is made. Thus, when a new transaction is wanted to be added, our structure is compatible with the Open/Closed Principle. Operation class is abstract base class. Here, the common fields collection_frequency, last_collection and bin are kept. Different CollectionOperations can be subclassed to Operation. For example, GarbageCollectionOperation.
 - A new class can be created later when a new collection operation is added.
 
 ##### Entity-relationship  diagram

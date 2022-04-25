@@ -7,6 +7,26 @@ First, run the following command.
 sudo apt install python3-pip python3-dev python3-django python3-virtualenv
 ```
 
+Postgresql Setup
+```sh
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt install postgresql libpq-dev postgresql-contrib
+```
+
+Run the following commands respectively to create your own postgresql database and user
+```sh
+sudo -i -u postgres
+psql
+CREATE DATABASE your_project_name;
+CREATE USER your_user_name WITH PASSWORD 'your_password';
+ALTER ROLE your_user_name SET client_encoding TO 'utf8';
+ALTER ROLE your_user_name SET default_transaction_isolation TO 'read committed';
+ALTER ROLE your_user_name SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE your_project_name TO your_user_name;
+ALTER USER your_user_name CREATEDB;
+```
+
 Run the following command to download the project.
 
 ```
@@ -53,6 +73,12 @@ python3 manage.py createsuperuser
 Run the following command to boot the project.
 ```
 python3 manage.py runserver
+```
+
+
+Run the following command to run the tests.
+```
+python3 manage.py test
 ```
 
 Enter the admin panel from the link below and add records to Bin, Operation and BinOperation models.

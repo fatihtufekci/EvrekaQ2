@@ -107,7 +107,7 @@ You can reach the project from the link below.
 -----------------------------
 
 ## alternative_solution app (Second Solution)
-- In the alternative solution, there are latitude and longitude fields in the Bin class. Having all Bin-Operation pairs in one table can bloat the BinOperation table. That's why I separated each Operation's relationship with Bin. Then, if the operations need different attributes and methods, a change specific to that operation is made. Thus, when a new transaction is wanted to be added, our structure is compatible with the Open/Closed Principle. Operation class is abstract base class. Here, the common fields collection_frequency, last_collection and bin are kept. Different CollectionOperations can be subclassed to Operation. For example, GarbageCollectionOperation.
+- In the alternative solution, there are latitude and longitude fields in the Bin class. Having all Bin-Operation pairs in one table can bloat the BinOperation table. That's why I separated each Operation's relationship with Bin. Then, if the operations need different attributes and methods, a change specific to that operation is made. Thus, when a new Operation class is wanted to be added, our structure is compatible with the Open/Closed Principle. Operation class is abstract base class. Here, the common fields collection_frequency, last_collection and bin are kept. Different CollectionOperations can be subclassed to Operation. For example, GarbageCollectionOperation.
 - A new class can be created later when a new collection operation is added.
 
 ##### Entity-relationship  diagram
